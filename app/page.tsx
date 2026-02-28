@@ -308,9 +308,9 @@ export default function Home() {
             Une offre que vous ne reverrez pas
           </h2>
           <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-lg shadow-slate-100">
-            <p className="text-slate-400 line-through text-lg mb-2">Prix futur : 139 DT/mois</p>
+            <p className="text-slate-400 line-through text-lg mb-2">Prix futur : 89 DT/mois</p>
             <div className="flex items-end justify-center gap-2 mb-3">
-              <span className="text-6xl font-extrabold text-slate-900">89</span>
+              <span className="text-6xl font-extrabold text-slate-900">59</span>
               <div className="text-left pb-2">
                 <p className="text-orange-500 font-bold text-lg">DT</p>
                 <p className="text-slate-400 text-sm">/mois</p>
@@ -449,7 +449,7 @@ export default function Home() {
 
       {/* ── FOOTER ──────────────────────────────────────────────── */}
       <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8">
-        <p>© 2026 ReplyAutomation — Conçu pour les e-commerces tunisiens 🇹🇳</p>
+        <p>© 2026 FlyReply — Conçu pour les e-commerces tunisiens 🇹🇳</p>
       </footer>
     </div>
   );
