@@ -9,7 +9,7 @@ const hankenGrotesk = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "FlyReply",
+  title: "Fly Reply",
   description:
     "Répondez automatiquement aux commentaires et messages sur Instagram & Facebook et transformez-les en vraies commandes.",
 };
