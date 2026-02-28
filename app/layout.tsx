@@ -9,9 +9,9 @@ const hankenGrotesk = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "ReplyAutomation — Bêta Privée pour E-commerces Tunisiens",
+  title: "FlyReply",
   description:
-    "Répondez automatiquement aux commentaires 'Prix ?' sur Instagram & Facebook et transformez-les en vraies commandes. Accès bêta limité à 20 boutiques tunisiennes.",
+    "Répondez automatiquement aux commentaires et messages sur Instagram & Facebook et transformez-les en vraies commandes.",
 };
 
 export default function RootLayout({
