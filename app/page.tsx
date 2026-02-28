@@ -110,7 +110,7 @@ export default function Home() {
             <span className="text-orange-400">commentaires</span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Répondez automatiquement aux commentaires «&nbsp;Prix&nbsp;?&nbsp;» et envoyez des DM
+            Répondez automatiquement aux commentaires et envoyez des messages
             qui transforment les visiteurs en vraies commandes — sans recruter un community manager.
           </p>
           <button
