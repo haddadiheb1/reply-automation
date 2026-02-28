@@ -6,7 +6,6 @@ type FormData = {
   name: string;
   storeName: string;
   instagramPage: string;
-  adBudget: string;
   phone: string;
 };
 
@@ -19,9 +18,11 @@ function validateForm(data: FormData): FormErrors {
     errors.storeName = "Le nom de la boutique est requis.";
   if (!data.instagramPage.trim())
     errors.instagramPage = "La page Instagram est requise.";
-  if (!data.adBudget)
-    errors.adBudget = "Veuillez sélectionner votre budget publicitaire.";
-  if (!data.phone.trim()) errors.phone = "Le numéro WhatsApp est requis.";
+  if (!data.phone.trim()) {
+    errors.phone = "Le numéro WhatsApp est requis.";
+  } else if (!/^[2945]\d{7}$/.test(data.phone.trim())) {
+    errors.phone = "Numéro invalide. Utilisez un numéro Ooredoo, Tunisie Telecom ou Orange (8 chiffres).";
+  }
   return errors;
 }
 
@@ -30,25 +31,56 @@ export default function Home() {
     name: "",
     storeName: "",
     instagramPage: "",
-    adBudget: "",
     phone: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
+
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/user-beta", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          full_name: formData.name,
+          store_name: formData.storeName,
+          instagram_page: formData.instagramPage,
+          whatsapp_number: formData.phone,
+        }),
+      });
+
+      if (!response.ok) {
+        const responseData = (await response.json()) as { error?: string };
+        setSubmitError(responseData.error ?? "Une erreur est survenue.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Impossible d'envoyer le formulaire pour le moment.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const scrollToForm = () =>
@@ -143,11 +175,12 @@ export default function Home() {
           </div>
 
           {/* Step 3 — What goes wrong */}
-          <div className="grid sm:grid-cols-3 gap-4 mb-4">
+          <div className="grid sm:grid-cols-2 gap-4 mb-4">
             {[
               { icon: "⏱️", title: "Vous répondez trop lentement", body: "Le temps de voir le commentaire, le client a déjà scrollé vers un concurrent." },
               { icon: "👁️‍🗨️", title: "Votre équipe rate des messages", body: "Avec 100+ comments par post, aucun humain ne peut tout suivre manuellement." },
               { icon: "🌙", title: "Vous n'êtes pas disponible 24h/24", body: "Les clients commentent la nuit, le weekend, pendant vos heures de repos." },
+              { icon: "✍️", title: "Vous répondez manuellement", body: "Copier-coller les prix, envoyer les DM un par un… c'est du temps volé à votre vrai travail : faire grandir votre boutique." },
             ].map(({ icon, title, body }) => (
               <div key={title} className="border border-slate-200 bg-slate-50 rounded-2xl p-6">
                 <span className="text-2xl mb-3 block">{icon}</span>
@@ -379,27 +412,6 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* Ad Budget */}
-                  <div>
-                    <label htmlFor="adBudget" className="block text-sm font-semibold text-slate-700 mb-1.5">Budget publicitaire mensuel</label>
-                    <select
-                      id="adBudget"
-                      value={formData.adBudget}
-                      onChange={(e) => handleChange("adBudget", e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm transition-colors outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 appearance-none bg-white cursor-pointer ${
-                        errors.adBudget ? "border-rose-300 bg-rose-50" : "border-slate-200 hover:border-slate-300"
-                      } ${!formData.adBudget ? "text-slate-400" : "text-slate-900"}`}
-                    >
-                      <option value="" disabled>Sélectionnez votre budget</option>
-                      <option value="0-500">0 – 500 DT</option>
-                      <option value="500-2000">500 – 2 000 DT</option>
-                      <option value="2000+">2 000 DT et plus</option>
-                    </select>
-                    {errors.adBudget && (
-                      <p className="mt-1.5 text-xs text-red-500">{errors.adBudget}</p>
-                    )}
-                  </div>
-
                   {/* Phone */}
                   <div>
                     <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 mb-1.5">Numéro WhatsApp</label>
@@ -418,10 +430,14 @@ export default function Home() {
 
                   <button
                     type="submit"
-                    className="w-full bg-orange-500 hover:bg-orange-400 text-white font-bold text-base py-4 rounded-full shadow-lg shadow-orange-200 transition-all duration-200 hover:scale-[1.02] mt-2 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full bg-orange-500 hover:bg-orange-400 disabled:bg-orange-300 disabled:cursor-not-allowed text-white font-bold text-base py-4 rounded-full shadow-lg shadow-orange-200 transition-all duration-200 hover:scale-[1.02] mt-2 cursor-pointer"
                   >
-                    👉 Réserver Ma Place
+                    {isSubmitting ? "Envoi en cours..." : "👉 Réserver Ma Place"}
                   </button>
+                  {submitError && (
+                    <p className="text-xs text-center text-red-500">{submitError}</p>
+                  )}
                   <p className="text-xs text-center text-slate-400 pt-1">
                     Nous allons contacter personnellement les boutiques sélectionnées.
                   </p>
