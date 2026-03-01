@@ -448,8 +448,13 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ──────────────────────────────────────────────── */}
-      <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8">
-        <p>© 2026 ReplyAutomation — Conçu pour les e-commerces tunisiens 🇹🇳</p>
+      <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8 px-6">
+        <p>© 2026 Fly Reply — Conçu pour les e-commerces tunisiens 🇹🇳</p>
+        <p className="mt-2">
+          <a href="/privacy-policy" className="hover:text-slate-300 transition-colors">
+            Politique de confidentialité
+          </a>
+        </p>
       </footer>
     </div>
   );
