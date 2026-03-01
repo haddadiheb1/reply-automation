@@ -448,7 +448,6 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ──────────────────────────────────────────────── */}
-<<<<<<< HEAD
       <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8 px-6">
         <p>© 2026 Fly Reply — Conçu pour les e-commerces tunisiens 🇹🇳</p>
         <p className="mt-2">
@@ -456,10 +455,6 @@ export default function Home() {
             Politique de confidentialité
           </a>
         </p>
-=======
-      <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8">
-        <p>© 2026 FlyReply — Conçu pour les e-commerces tunisiens 🇹🇳</p>
->>>>>>> 16cd3db0ddd3489d702f7d7eaecaa2adca3c2c8c
       </footer>
     </div>
   );
