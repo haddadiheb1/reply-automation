@@ -110,7 +110,7 @@ export default function Home() {
             <span className="text-orange-400">commentaires</span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Répondez automatiquement aux commentaires «&nbsp;Prix&nbsp;?&nbsp;» et envoyez des DM
+            Répondez automatiquement aux commentaires et envoyez des messages
             qui transforment les visiteurs en vraies commandes — sans recruter un community manager.
           </p>
           <button
@@ -308,9 +308,9 @@ export default function Home() {
             Une offre que vous ne reverrez pas
           </h2>
           <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-lg shadow-slate-100">
-            <p className="text-slate-400 line-through text-lg mb-2">Prix futur : 139 DT/mois</p>
+            <p className="text-slate-400 line-through text-lg mb-2">Prix futur : 89 DT/mois</p>
             <div className="flex items-end justify-center gap-2 mb-3">
-              <span className="text-6xl font-extrabold text-slate-900">89</span>
+              <span className="text-6xl font-extrabold text-slate-900">59</span>
               <div className="text-left pb-2">
                 <p className="text-orange-500 font-bold text-lg">DT</p>
                 <p className="text-slate-400 text-sm">/mois</p>
@@ -448,6 +448,7 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ──────────────────────────────────────────────── */}
+<<<<<<< HEAD
       <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8 px-6">
         <p>© 2026 Fly Reply — Conçu pour les e-commerces tunisiens 🇹🇳</p>
         <p className="mt-2">
@@ -455,6 +456,10 @@ export default function Home() {
             Politique de confidentialité
           </a>
         </p>
+=======
+      <footer className="bg-slate-900 text-slate-500 text-center text-sm py-8">
+        <p>© 2026 FlyReply — Conçu pour les e-commerces tunisiens 🇹🇳</p>
+>>>>>>> 16cd3db0ddd3489d702f7d7eaecaa2adca3c2c8c
       </footer>
     </div>
   );
