@@ -233,7 +233,6 @@ export default function PrivacyPolicy() {
           <div className="mt-5 space-y-3 text-sm">
             {[
               ["Meta (Facebook / Instagram)", "Plateforme tierce sur laquelle opère le service via l'API Graph. Soumis à la politique de confidentialité de Meta."],
-              ["Supabase", "Base de données sécurisée hébergée dans le cloud pour stocker les données des comptes bêta. Données chiffrées au repos et en transit."],
             ].map(([name, desc]) => (
               <div key={name as string} className="flex gap-3 border border-slate-200 rounded-xl px-5 py-3">
                 <span className="font-semibold text-slate-900 shrink-0">{name}</span>
